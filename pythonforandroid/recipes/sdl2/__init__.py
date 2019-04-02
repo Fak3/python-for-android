@@ -4,17 +4,22 @@ import sh
 
 
 class LibSDL2Recipe(BootstrapNDKRecipe):
-    version = "2.0.9"
-    url = "https://www.libsdl.org/release/SDL2-{version}.tar.gz"
-    md5sum = 'f2ecfba915c54f7200f504d8b48a5dfe'
+    version = "45b56ed51919"
+    url = "https://hg.libsdl.org/SDL/archive/{version}.zip"
+    md5sum = "75c3946311a320482609fc2fa68a695d"
 
     dir_name = 'SDL'
 
     depends = ['sdl2_image', 'sdl2_mixer', 'sdl2_ttf']
 
-    def get_recipe_env(self, arch=None, with_flags_in_cc=True, with_python=True):
+    def get_recipe_env(self,
+                       arch=None,
+                       with_flags_in_cc=True,
+                       with_python=True):
         env = super(LibSDL2Recipe, self).get_recipe_env(
-            arch=arch, with_flags_in_cc=with_flags_in_cc, with_python=with_python)
+            arch=arch, with_flags_in_cc=with_flags_in_cc,
+            with_python=with_python
+        )
         env['APP_ALLOW_MISSING_DEPS'] = 'true'
         return env
 

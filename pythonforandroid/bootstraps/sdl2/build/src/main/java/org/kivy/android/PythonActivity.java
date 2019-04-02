@@ -425,7 +425,8 @@ public class PythonActivity extends SDLActivity {
             return;
         runOnUiThread(new Runnable() {
             public void run() {
-                if (((PythonActivity)PythonActivity.mSingleton).mAppConfirmedActive &&
+                if (((PythonActivity)PythonActivity.mSingleton) != null &&
+                        ((PythonActivity)PythonActivity.mSingleton).mAppConfirmedActive &&
                         loadingScreenRemovalTimer == null) {
                     // Remove loading screen but with a delay.
                     // (app can use p4a's android.loadingscreen module to
@@ -568,6 +569,7 @@ public class PythonActivity extends SDLActivity {
         } catch (UnsatisfiedLinkError e) {
             // Catch resume while still in loading screen failing to
             // call native function (since it's not yet loaded)
+            return;  // no point in barging further
         }
         considerLoadingScreenRemoval();
     }
@@ -579,6 +581,7 @@ public class PythonActivity extends SDLActivity {
         } catch (UnsatisfiedLinkError e) {
             // Catch window focus while still in loading screen failing to
             // call native function (since it's not yet loaded)
+            return;  // no point in barging further
         }
         considerLoadingScreenRemoval();
     }    

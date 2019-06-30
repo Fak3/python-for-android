@@ -353,6 +353,7 @@ int main(int argc, char *argv[]) {
   fclose(fd);
 
   if (PyErr_Occurred() != NULL) {
+      LOGP("python error");  
     ret = 1;
     PyErr_Print(); /* This exits with the right code if SystemExit. */
     PyObject *f = PySys_GetObject("stdout");
@@ -360,6 +361,9 @@ int main(int argc, char *argv[]) {
             "\n", f)) /* python2 used Py_FlushLine, but this no longer exists */
       PyErr_Clear();
   }
+  else {
+    LOGP("App stopped without error");  
+    }
 
   LOGP("Python for android ended.");
 

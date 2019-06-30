@@ -4,7 +4,7 @@ from __future__ import print_function
 
 import json
 from os.path import (
-    dirname, join, isfile, realpath,
+    abspath, dirname, join, isfile, realpath,
     relpath, split, exists, basename
 )
 from os import listdir, makedirs, remove

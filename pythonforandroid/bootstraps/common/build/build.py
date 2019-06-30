@@ -297,7 +297,13 @@ main.py that loads it.''')
     make_python_zip()
 
     # Add extra environment variable file into tar-able directory:
-    env_vars_tarpath = tempfile.mkdtemp(prefix="p4a-extra-env-")
+    #env_vars_tarpath = tempfile.mkdtemp(prefix="p4a-extra-env-")
+    env_vars_tarpath = abspath('./p4a-env')
+    #print(env_vars_tarpath)
+    #input('hit')
+    if exists(env_vars_tarpath):
+        shutil.rmtree(env_vars_tarpath)
+    os.makedirs(env_vars_tarpath)
     with open(os.path.join(env_vars_tarpath, "p4a_env_vars.txt"), "w") as f:
         if hasattr(args, "window"):
             f.write("P4A_IS_WINDOWED=" + str(args.window) + "\n")
@@ -347,8 +353,6 @@ main.py that loads it.''')
         for directory in _temp_dirs_to_clean:
             shutil.rmtree(directory)
 
-    # Remove extra env vars tar-able directory:
-    shutil.rmtree(env_vars_tarpath)
 
     # Prepare some variables for templating process
     res_dir = "src/main/res"
